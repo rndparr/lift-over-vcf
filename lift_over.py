@@ -63,7 +63,7 @@ def _main():
                     ref = record[3] if new_strand == '+' else reverse_complement(record[3])
                     alt = record[4] if new_strand == '+' else reverse_complement(record[4])
                     print '\t'.join([new_chrom, new_pos, record[2], ref, alt] + record[5:])
-        if count & 1000 ==0:
+        if count % 1000 ==0:
             print >> sys.stderr, count
         count = count+1
           
