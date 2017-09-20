@@ -65,6 +65,7 @@ def _main():
                     print '\t'.join([new_chrom, new_pos, record[2], ref, alt] + record[5:])
         if count & 1000 ==0:
             print >> sys.stderr, count
+        count = count+1
           
 
 if __name__ == '__main__':
