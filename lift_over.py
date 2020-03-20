@@ -7,7 +7,10 @@ import string
 import tempfile
 import argparse
 import subprocess
+import glob
 
+chain_search = os.path.join(os.path.dirname(__file__), "chain") + r'/*.over.chain.gz'
+chain_choices = [os.path.basename(x).split('.',3)[0] for x in glob.glob(chain_search)]
 
 def lift_over(chrom, pos, strand, chain):
     lift_over_exec = os.path.join(os.path.dirname(__file__), 'bin', 'liftOver')
@@ -43,7 +46,7 @@ def reverse_complement(x):
 
 def _main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--chain', choices=['hg18ToHg19', 'hg18ToHg38', 'hg19ToHg38'], required=True)
+    parser.add_argument('--chain', choices=chain_choices, required=True)
     parser.add_argument('--format', choices=['vcf'], default='vcf')
     args = parser.parse_args()
 
