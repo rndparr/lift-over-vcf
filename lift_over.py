@@ -31,9 +31,8 @@ def lift_over(chrom, pos, strand, chain):
             # $ ./liftOver <oldFile> <map.chain> <newFile> <unMapped>
             cmd = [lift_over_exec, query.name, map_chain, mapped.name, unmapped.name]
             # print >>sys.stderr, '[DEBUG]', cmd
-            p = subprocess.Popen(cmd)
-            # stdout, 
-            # stderr = p.communicate()
+            p = subprocess.Popen(cmd, stdout=subprocess.DEVNULL)
+            stdout, stderr = p.communicate()
             del p
 
             mapped.seek(0)
@@ -67,7 +66,7 @@ def _main():
                     ref = record[3] if new_strand == '+' else reverse_complement(record[3])
                     alt = record[4] if new_strand == '+' else reverse_complement(record[4])
                     print '\t'.join([new_chrom, new_pos, record[2], ref, alt] + record[5:])
-        # if count % 1000 ==0:
+        # if count % 10 ==0:
         #     print >> sys.stderr, count
         count = count+1
           
