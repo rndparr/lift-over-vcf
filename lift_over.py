@@ -33,7 +33,7 @@ def lift_over(chrom, pos, strand, chain):
             # print >>sys.stderr, '[DEBUG]', cmd
             p = subprocess.Popen(cmd)
             # stdout, 
-            stderr = p.communicate()
+            # stderr = p.communicate()
             del p
 
             mapped.seek(0)
