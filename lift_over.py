@@ -31,7 +31,7 @@ def lift_over(chrom, pos, strand, chain):
             # $ ./liftOver <oldFile> <map.chain> <newFile> <unMapped>
             cmd = [lift_over_exec, query.name, map_chain, mapped.name, unmapped.name]
             # print >>sys.stderr, '[DEBUG]', cmd
-            p = subprocess.Popen(cmd, stdout=subprocess.DEVNULL)
+            p = subprocess.Popen(cmd)
             stdout, stderr = p.communicate()
             del p
 
