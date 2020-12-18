@@ -63,10 +63,14 @@ def _main():
                                 '+',             # vcf is always forward to reference
                                 args.chain)
                 if new:
-                    new_chrom, new_pos, new_strand = new
-                    ref = record[3] if new_strand == '+' else reverse_complement(record[3])
-                    alt = record[4] if new_strand == '+' else reverse_complement(record[4])
-                    print '\t'.join([new_chrom, new_pos, record[2], ref, alt] + record[5:])
+                    try:
+                        new_chrom, new_pos, new_strand = new
+                        ref = record[3] if new_strand == '+' else reverse_complement(record[3]) if not record[3].startswith('<') else record[3]
+                        alt = record[4] if new_strand == '+' else reverse_complement(record[4]) if not record[4].startswith('<') else record[4]
+                        print '\t'.join([new_chrom, new_pos, record[2], ref, alt] + record[5:])
+                    except Exception as e:
+                        print >> sys.stderr, 'Caught exception for line='+str(count)
+                        print >> sys.stderr, e
         # if count % 10 ==0:
         #     print >> sys.stderr, count
         count = count+1
